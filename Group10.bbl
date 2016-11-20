@@ -9,6 +9,11 @@ Optical recognition of handwritten digits data set.
 Optical recognition of handwritten digits data set.
 \newblock \url{https://archive.ics.uci.edu/ml/datasets/ Letter+Recognition}.
 
+\bibitem{cortes1995support}
+Corinna Cortes and Vladimir Vapnik.
+\newblock Support-vector networks.
+\newblock {\em Machine learning}, 20(3):273--297, 1995.
+
 \bibitem{frey1991letter}
 Peter~W Frey and David~J Slate.
 \newblock Letter recognition using holland-style adaptive classifiers.
