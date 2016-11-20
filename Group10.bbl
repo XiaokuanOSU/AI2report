@@ -1,0 +1,30 @@
+\begin{thebibliography}{1}
+
+\bibitem{digitdataset}
+Optical recognition of handwritten digits data set.
+\newblock \url{http://archive.ics.uci.edu/ml/datasets/
+  Optical+Recognition+of+Handwritten+Digits}.
+
+\bibitem{letterdataset}
+Optical recognition of handwritten digits data set.
+\newblock \url{https://archive.ics.uci.edu/ml/datasets/ Letter+Recognition}.
+
+\bibitem{frey1991letter}
+Peter~W Frey and David~J Slate.
+\newblock Letter recognition using holland-style adaptive classifiers.
+\newblock {\em Machine Learning}, 6:161, 1991.
+
+\bibitem{hall2009weka}
+Mark Hall, Eibe Frank, Geoffrey Holmes, Bernhard Pfahringer, Peter Reutemann,
+  and Ian~H Witten.
+\newblock The weka data mining software: an update.
+\newblock {\em ACM SIGKDD explorations newsletter}, 11(1):10--18, 2009.
+
+\bibitem{kaynak1995methods}
+C~Kaynak.
+\newblock Methods of combining multiple classifiers and their applications to
+  handwritten digit recognition.
+\newblock Master's thesis, Institute of Graduate Studies in Science and
+  Engineering, Bogazici University, 1995.
+
+\end{thebibliography}

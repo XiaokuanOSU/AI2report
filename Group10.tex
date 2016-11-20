@@ -1,0 +1,81 @@
+\documentclass[11pt]{article}
+
+\usepackage{fullpage} % Package to use full page
+\usepackage{parskip} % Package to tweak paragraph skipping
+\usepackage{tikz} % Package for drawing
+\usepackage{amsmath}
+\usepackage[breaklinks]{hyperref}
+\usepackage{url}
+\usepackage{breakurl} 
+\usepackage{enumerate}
+\usepackage{subcaption}
+\usepackage{mathptmx}
+\def \hfillx {\hspace*{-\textwidth} \hfill}
+
+\title{Hand-written Digits Classification and Letter Recognition\\
+Initial Report}
+\author{Group 10 \\ Sixiang Ma, Yuan Xiao, Xiaokuan Zhang}
+\date{11/22/2016}
+
+
+
+\begin{document}
+
+\maketitle
+\section*{Abstract}
+say something
+
+\section{Introduction}
+
+\subsection{Problem Description}
+Our group wants to solve the problem of classifying hand-written digits and  black-and-white rectangular pixel-displayed letters. We have two datasets. One is hand-written digits dataset \cite{digitdataset}, from a total of 43 people, 30 contributed to the training set and different 13 to the test set. Another is letter recognition dataset \cite{letterdataset}. The character images were based on 20 different fonts. More details can be found by visiting the links.
+
+\subsection{Classifying Algorithms}
+In this report, we test three machine learning  algorithms, i.e., Support Vector Machine (SVM), Neural Networks, and Naive Bayes. We will present the detail of algorithms in \ref{sec:metho}.
+\subsection{Result Summary}
+For the first dataset, after tuning the parameters, the three classifiers can achieve , , , accuracy. 
+
+\section{Background}
+The hand-written digit dataset was first used in \cite{kaynak1995methods}. In the paper they combined different classifiers to obtain a better performance. The letter recognition dataset was first used in \cite{frey1991letter}. They generated classification rules to distinguish different letters.
+
+\section{Methodology}\label{sec:metho}
+
+\subsection{Support Vector Machine}
+
+\subsection{Neural Networks}
+
+\subsection{Naive Bayes}
+Naive Bayes classifier makes use of the Bayes Theorem with an assumption that all the features are independent. It is basically a conditional probability model. It is one of the simplest machine learning algorithms.
+
+\section{Evaluation}
+In this project, we mainly used \texttt{Weka} \cite{hall2009weka} to test different machine learning algorithms.
+
+\subsection{Hand-written Digits Classification}
+\subsubsection{Support Vector Machine}
+
+\subsubsection{Neural Networks}
+
+\subsubsection{Naive Bayes}
+
+\subsection{Letter Recognition}
+\subsubsection{Support Vector Machine}
+
+\subsubsection{Neural Networks}
+
+\subsubsection{Naive Bayes}
+
+\section{Discussion}
+
+\section{Conclusion}
+
+
+\bibliographystyle{plain}
+\bibliography{bibliography.bib}
+\end{document}
+
+
+
+
+
+
+
