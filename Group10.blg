@@ -1,49 +1,49 @@
-This is BibTeX, Version 0.99d (TeX Live 2016)
+This is BibTeX, Version 0.99d (TeX Live 2015)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: Group10.aux
 The style file: plain.bst
-Database file #1: bibliography.bib.bib
+Database file #1: bibliography.bib
 Warning--to sort, need author or key in digitdataset
 Warning--to sort, need author or key in letterdataset
-You've used 6 entries,
+You've used 11 entries,
             2118 wiz_defined-function locations,
-            529 strings with 4882 characters,
-and the built_in function-call counts, 1585 in all, are:
-= -- 154
-> -- 68
-< -- 0
-+ -- 29
-- -- 22
-* -- 104
-:= -- 265
-add.period$ -- 16
-call.type$ -- 6
-change.case$ -- 29
+            560 strings with 5624 characters,
+and the built_in function-call counts, 3041 in all, are:
+= -- 297
+> -- 131
+< -- 1
++ -- 55
+- -- 42
+* -- 202
+:= -- 512
+add.period$ -- 30
+call.type$ -- 11
+change.case$ -- 53
 chr.to.int$ -- 0
-cite$ -- 8
-duplicate$ -- 55
-empty$ -- 135
-format.name$ -- 22
-if$ -- 328
+cite$ -- 13
+duplicate$ -- 107
+empty$ -- 256
+format.name$ -- 42
+if$ -- 626
 int.to.chr$ -- 0
-int.to.str$ -- 6
-missing$ -- 3
-newline$ -- 31
-num.names$ -- 8
-pop$ -- 32
+int.to.str$ -- 11
+missing$ -- 8
+newline$ -- 55
+num.names$ -- 18
+pop$ -- 59
 preamble$ -- 1
-purify$ -- 23
+purify$ -- 43
 quote$ -- 0
-skip$ -- 45
+skip$ -- 82
 stack$ -- 0
-substring$ -- 84
-swap$ -- 5
-text.length$ -- 0
+substring$ -- 176
+swap$ -- 11
+text.length$ -- 1
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 24
+type$ -- 42
 warning$ -- 2
-while$ -- 13
-width$ -- 7
-write$ -- 60
+while$ -- 29
+width$ -- 13
+write$ -- 112
 (There were 2 warnings)
