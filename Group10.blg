@@ -5,45 +5,45 @@ The style file: plain.bst
 Database file #1: bibliography.bib
 Warning--to sort, need author or key in digitdataset
 Warning--to sort, need author or key in letterdataset
-You've used 12 entries,
+You've used 13 entries,
             2118 wiz_defined-function locations,
-            565 strings with 5742 characters,
-and the built_in function-call counts, 3331 in all, are:
-= -- 322
-> -- 149
+            571 strings with 5888 characters,
+and the built_in function-call counts, 3528 in all, are:
+= -- 339
+> -- 156
 < -- 2
-+ -- 62
-- -- 48
-* -- 221
-:= -- 563
-add.period$ -- 33
-call.type$ -- 12
-change.case$ -- 57
++ -- 65
+- -- 50
+* -- 227
+:= -- 595
+add.period$ -- 35
+call.type$ -- 13
+change.case$ -- 61
 chr.to.int$ -- 0
-cite$ -- 14
-duplicate$ -- 119
-empty$ -- 278
-format.name$ -- 48
-if$ -- 686
+cite$ -- 15
+duplicate$ -- 126
+empty$ -- 300
+format.name$ -- 50
+if$ -- 729
 int.to.chr$ -- 0
-int.to.str$ -- 12
+int.to.str$ -- 13
 missing$ -- 10
-newline$ -- 60
-num.names$ -- 20
-pop$ -- 67
+newline$ -- 64
+num.names$ -- 22
+pop$ -- 76
 preamble$ -- 1
-purify$ -- 47
+purify$ -- 50
 quote$ -- 0
-skip$ -- 90
+skip$ -- 98
 stack$ -- 0
-substring$ -- 181
-swap$ -- 13
+substring$ -- 186
+swap$ -- 14
 text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 44
+type$ -- 48
 warning$ -- 2
-while$ -- 31
-width$ -- 14
-write$ -- 123
+while$ -- 33
+width$ -- 15
+write$ -- 131
 (There were 2 warnings)

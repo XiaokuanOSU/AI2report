@@ -48,6 +48,10 @@ C~Kaynak.
 \newblock Master's thesis, Institute of Graduate Studies in Science and
   Engineering, Bogazici University, 1995.
 
+\bibitem{Lichman2013}
+M.~Lichman.
+\newblock {UCI} machine learning repository, 2013.
+
 \bibitem{mcculloch1943logical}
 Warren~S McCulloch and Walter Pitts.
 \newblock A logical calculus of the ideas immanent in nervous activity.
