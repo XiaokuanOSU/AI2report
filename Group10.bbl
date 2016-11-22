@@ -20,6 +20,11 @@ Corinna Cortes and Vladimir Vapnik.
 \newblock Support-vector networks.
 \newblock {\em Machine learning}, 20(3):273--297, 1995.
 
+\bibitem{duda1973pattern}
+Richard~O Duda, Peter~E Hart, et~al.
+\newblock {\em Pattern classification and scene analysis}, volume~3.
+\newblock Wiley New York, 1973.
+
 \bibitem{frey1991letter}
 Peter~W Frey and David~J Slate.
 \newblock Letter recognition using holland-style adaptive classifiers.
