@@ -27,7 +27,7 @@ say something
 \section{Introduction}
 
 \subsection{Problem Description}
-Our group wants to solve the problem of classifying hand-written digits and  black-and-white rectangular pixel-displayed letters. We have two datasets from UCI machine learning repository \cite{Lichman2013}. One is hand-written digits dataset \cite{digitdataset}, from a total of 43 people, 30 contributed to the training set and different 13 to the test set. Another is letter recognition dataset \cite{letterdataset}. The character images were based on 20 different fonts. More details can be found by visiting the links.
+Our group wants to solve the problem of classifying hand-written digits and  black-and-white rectangular pixel-displayed letters. We have two datasets from UCI machine learning repository \cite{Lichman2013}. One is hand-written digits dataset \cite{digitdataset}. It has 5620 instances. For each instance, there are 1024 attributes (32x32 matrix), whose values are either 0 or 1. After grouping every 4x4 blocks, the dimension is reduced to 64 (8x8 matrix), and each attribute ranges from 0 to 16. Another is letter recognition dataset \cite{letterdataset}. The character images were based on 20 different fonts. It has 20000 instances. For each instance, there are 16 attributes, whose values range from 0 to 15. More details can be found by visiting the links.
 
 \subsection{Classifying Algorithms}
 In this report, we test three machine learning  algorithms, i.e., Support Vector Machine (SVM), Neural Networks, and Naive Bayes. We will present the detail of algorithms in Section \ref{sec:metho}.
@@ -35,14 +35,14 @@ In this report, we test three machine learning  algorithms, i.e., Support Vector
 For the first dataset, after tuning the parameters, the three classifiers can achieve , , , accuracy. 
 
 \section{Background}
-The hand-written digit dataset was first used in \cite{kaynak1995methods}. In the paper they combined different classifiers to obtain a better performance. The letter recognition dataset was first used in \cite{frey1991letter}. They generated classification rules to distinguish different letters.
+The hand-written digit dataset was first used in \cite{kaynak1995methods}. In the paper they combined different classifiers to obtain a better performance.  The letter recognition dataset was first used in \cite{frey1991letter}. They generated classification rules to distinguish different letters.
 
 \section{Methodology}\label{sec:metho}
 
 \subsection{Support Vector Machine}
 Support vector machines (SVMs) \cite{cortes1995support} are supervised learning models that analyze data for classicifation or regression. Given a set of training examples, which are marked with their belonging categories, a SVM algorithm builds a model to recognize and assign testing examples to the predicted categories. 
 
-Say something about kernel functions.
+(Say something about kernel functions).
 
 \subsection{Neural Networks}
 Neural networks, or artificial neural networks \cite{hagan1996neural}, simulate the functions of nerve cells of human brain and serve as an important computational approach in machine learning. They typically form a structure of multiple layers of basic perceptrons and support both supervised and unsupervised learning.
@@ -70,12 +70,19 @@ In this project, we mainly used \texttt{Weka} \cite{hall2009weka} to test differ
 \subsubsection{Naive Bayes}
 
 \section{Discussion}
+\subsection{Evaluation Matrix}
+In our presentation, we used \texttt{root relative squared error} to evaluate the performance of our algorithms and falsely claimed that SVM was not suitable for our datasets. However, it makes little sense to evaluate this feature on  non-binary datasets. So in the report, we changed it to F-measure.
 
+\subsection{Different Kernels of SVM}
+In our presentation, we only talked about the polynomial kernel. In the report, we added xxx, xxx kernels to compare the performance. By comparison, we can see that ......
+ 
 \section{Conclusion}
 
 
+
+\newpage
 \bibliographystyle{plain}
-\bibliography{bibliography}
+\bibliography{Group10}
 \end{document}
 
 
