@@ -10,11 +10,13 @@
 \usepackage{enumerate}
 \usepackage{subcaption}
 \usepackage{mathptmx}
+\usepackage{epsfig}
+\usepackage{multirow}
 \def \hfillx {\hspace*{-\textwidth} \hfill}
 
 \title{Hand-written Digits Classification and Letter Recognition}
 \author{Group 10 \\ Sixiang Ma, Yuan Xiao, Xiaokuan Zhang}
-\date{12/06/2016}
+\date{12/09/2016}
 
 
 
@@ -53,7 +55,7 @@ Neural networks have a long history, dating back to the 1940s \cite{mcculloch194
 Naive Bayes classifier makes use of the Bayes Theorem. It is basically a conditional probability model. It is one of the simplest machine learning algorithms. Compared to Bayesian Networks, Naive Bayes is technically a special case by assuming that all features are conditionally independent from each other given the class label. One of the earliest papers that described this algorithm was from 1970s \cite{duda1973pattern}. 
 
 \section{Evaluation}
-In this project, we mainly used \texttt{Weka} \cite{hall2009weka} to test different machine learning algorithms.
+In this project, we mainly used \texttt{Weka} \cite{hall2009weka} to test different machine learning algorithms. For each algorithm, we use different parameter settings, which will be covered in this section.
 
 \subsection{Hand-written Digits Classification}
 \subsubsection{Support Vector Machine}
@@ -61,6 +63,8 @@ In this project, we mainly used \texttt{Weka} \cite{hall2009weka} to test differ
 \subsubsection{Neural Networks}
 
 \subsubsection{Naive Bayes}
+The Naive Bayes works well on the Hand-written Digit dataset. In Figure \ref{fig:bayes}, K means whether to use kernel estimator, and D means whether to use supervised discretization. In Figure \ref{fig:digit-bayes}, when K=F, D=F, which is the worst case scenario, the accuracy and F-measure are still higher than 90\%. In the best case (K=T, D=F), they both exceeds 92\%.
+
 
 \subsection{Letter Recognition}
 \subsubsection{Support Vector Machine}
@@ -68,13 +72,65 @@ In this project, we mainly used \texttt{Weka} \cite{hall2009weka} to test differ
 \subsubsection{Neural Networks}
 
 \subsubsection{Naive Bayes}
+Naive Bayes does not work well on the Letter Recognition dataset. From Figure \ref{fig:letter-bayes}, we can see that the highest accuracy is lower than 75\%. Generally speaking, Naive Bayes is not suitable for classifying letters.
 
+In this dataset, we are also interested in which letters Naive Bayes performs worst. Table \ref{tbl:bayes} shows the top 3 worst cases when using Naive Bayes with different parameters. In all three parameter settings, `H' is always one of the top 3, which means that `H' is quite hard to classify for Naive Bayes. Also, the same applies to `S' and `X', as they appear in two of the three cases.
+
+
+
+\begin{table}[!htb]
+%\begin{subtable}
+
+\centering
+\begin{tabular}{c  c  c} \hline
+% centering table
+% creating 10 columns
+% inserting double-line 
+
+Parameters & Class (Letters) & Accuracy \\\hline
+\multirow{3}{*}{K = F, D = F} & S & 29.4\% \\
+	& H & 30.5\% \\
+	& Y & 33.1\% \\\hline
+\multirow{3}{*}{K = T, D = F} & H & 57.4\% \\
+	& S & 64.2\% \\
+	& X & 64.3\% \\\hline
+\multirow{3}{*}{K = F, D = T} & H & 57.5\% \\
+	& E & 60.7\% \\
+	& X & 64.4\% \\\hline
+\end{tabular}
+\caption{Worst Cases: Naive Bayes} % title name of the table
+\label{tbl:bayes}
+%\end{subtable} 
+\end{table}
+
+
+\begin{figure}[htbp]
+\centering
+
+\begin{subfigure}[htbp]{0.46\columnwidth}
+\includegraphics*[width=\textwidth]{fig/digit_bayes}
+\caption{Digit Classification}
+\label{fig:digit-bayes}
+\end{subfigure}
+\hfill
+\begin{subfigure}[htbp]{0.46\columnwidth}
+\includegraphics*[width=\textwidth]{fig/letter_bayes}
+\caption{Letter Recognition}
+\label{fig:letter-bayes}
+\end{subfigure}
+\caption{Performance of Naive Bayes}
+\label{fig:bayes}
+\end{figure}
 \section{Discussion}
+
 \subsection{Evaluation Matrix}
 In our presentation, we used \texttt{root relative squared error} to evaluate the performance of our algorithms and falsely claimed that SVM was not suitable for our datasets. However, it makes little sense to evaluate this feature on  non-binary datasets. So in the report, we changed it to F-measure.
 
 \subsection{Different Kernels of SVM}
 In our presentation, we only talked about the polynomial kernel. In the report, we added xxx, xxx kernels to compare the performance. By comparison, we can see that ......
+
+
+\subsection{Parameters of Multi-layer Perceptron}
  
 \section{Conclusion}
 
