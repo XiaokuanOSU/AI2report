@@ -61,15 +61,74 @@ In this project, we mainly used \texttt{Weka} \cite{hall2009weka} to test differ
 \subsubsection{Support Vector Machine}
 
 \subsubsection{Neural Networks}
+In order to understand how the many parameters influence the performance of multilayer perceptron in classification, we decide to change only one parameter at a time. The default setting is ``-L 0.3 -M 0.2 -N 500 -V 0 -S 0 -E 20 -H a". And the parameters that we are interested in are learning rate, training time and validation threshold.
+
+Figure \ref{fig:digit-ann} shows the average performance for different parameter combinations. For default settings, we have the average accuracy of 92.73\%. And the root relative squared error is as low as 38.53\%. Changing validation threshold to either more or less does not affect the performance at all. And if we let training time be less, the overall accuracy lowers a little, which matches our expectation.
+
+It can be easily noticed that changing learning rate to 0.6 affects the performance heavily. Thus we tested with the same parameter combination again. In Figure \ref{fig:digit-ann-special}, when we ran the test again, the accuracy grew to 98.36\%. Such inconsistency in the test result showed that the performance of multipayer perceptron is influenced by stochastic. If we increase the stochastic by modifying the parameters, the fluctuation grows.
+
+
+\begin{figure}[htbp]
+\centering
+
+\begin{subfigure}[htbp]{0.46\columnwidth}
+\includegraphics*[width=\textwidth]{fig/digit_ANN}
+\caption{Digit Classification}
+\label{fig:digit-ann}
+\end{subfigure}
+\hfill
+\begin{subfigure}[htbp]{0.46\columnwidth}
+\includegraphics*[width=\textwidth]{fig/digit_ANN_special}
+\caption{L=0.6 in Digit Classification}
+\label{fig:digit-ann-special}
+\end{subfigure}
+\hfill
+\begin{subfigure}[htbp]{0.46\columnwidth}
+\includegraphics*[width=\textwidth]{fig/letter_ANN}
+\caption{Letter Recognition}
+\label{fig:letter-ann}
+\end{subfigure}
+\caption{Performance of Artificial Neural Networks}
+\label{fig:ann}
+\end{figure}
+
 
 \subsubsection{Naive Bayes}
 The Naive Bayes works well on the Hand-written Digit dataset. In Figure \ref{fig:bayes}, K means whether to use kernel estimator, and D means whether to use supervised discretization. In Figure \ref{fig:digit-bayes}, when K=F, D=F, which is the worst case scenario, the accuracy and F-measure are still higher than 90\%. In the best case (K=T, D=F), they both exceeds 92\%.
-
 
 \subsection{Letter Recognition}
 \subsubsection{Support Vector Machine}
 
 \subsubsection{Neural Networks}
+The overall performance of multilayer perceptron is quite stable. The accuracy is around 82\% and the root relative squared error is around 56\%. However, there are some classes with relatively low accuracy making the average performance not so good as digit recognition. Figure \ref{tbl:ann} shows the least correct classes: `G', `H' and `S'.
+
+Neural networks do a better job than the other two algorithms in recognizing `O' and `Q' and it can correctly tell `X' apart from `S'. Changing learning rate higher helps the performance with `H'.
+
+\begin{table}[!htb]
+%\begin{subtable}
+
+\centering
+\begin{tabular}{c  c  c} \hline
+% centering table
+% creating 10 columns
+% inserting double-line 
+
+Parameters & Class (Letters) & Accuracy \\\hline
+\multirow{3}{*}{Default} & G & 69\% \\
+	& H & 64.4\% \\
+	& S & 65\% \\\hline
+\multirow{3}{*}{L = 0.6} & G & 68.2\% \\
+	& H & 69.1\% \\
+	& S & 64\% \\\hline
+\multirow{3}{*}{N = 200} & G & 69.3\% \\
+	& H & 65.1\% \\
+	& S & 64.4\% \\\hline
+\end{tabular}
+\caption{Worst Cases: Multilayer Perceptron} % title name of the table
+\label{tbl:ann}
+%\end{subtable} 
+\end{table}
+
 
 \subsubsection{Naive Bayes}
 Naive Bayes does not work well on the Letter Recognition dataset. From Figure \ref{fig:letter-bayes}, we can see that the highest accuracy is lower than 75\%. Generally speaking, Naive Bayes is not suitable for classifying letters.
@@ -129,8 +188,12 @@ In our presentation, we used \texttt{root relative squared error} to evaluate th
 \subsection{Different Kernels of SVM}
 In our presentation, we only talked about the polynomial kernel. In the report, we added xxx, xxx kernels to compare the performance. By comparison, we can see that ......
 
+\subsection{Parameters of Multilayer Perceptron}
+Multilayer Perceptron has a number of parameters. In the project, we would like to look into the following specific parameters: learning rate, training time and validation threshold. Other parameters include momentum, seed, nominalToBinaryFilter, hiddenLayers etc.
 
-\subsection{Parameters of Multi-layer Perceptron}
+Learning rate (-L) stands for the amount the weights are updated. Training time (-N) is the number of epochs to train through. If the validation set is non-zero then it can terminate the network early. Validation threshold (-E) is used to terminate validation testing. The value here dictates how many times in a row the validation set error can get worse before training is terminated.
+
+In our tests, the validation threshold does not affect the performance.
  
 \section{Conclusion}
 
