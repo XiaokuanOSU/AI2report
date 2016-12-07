@@ -12,6 +12,7 @@
 \usepackage{mathptmx}
 \usepackage{epsfig}
 \usepackage{multirow}
+%\usepackage{minipage}
 \def \hfillx {\hspace*{-\textwidth} \hfill}
 
 \title{Hand-written Digits Classification and Letter Recognition}
@@ -29,7 +30,7 @@ say something
 \section{Introduction}
 
 \subsection{Problem Description}
-Our group wants to solve the problem of classifying hand-written digits and  black-and-white rectangular pixel-displayed letters. We have two datasets from UCI machine learning repository \cite{Lichman2013}. One is hand-written digits dataset \cite{digitdataset}. It has 5620 instances. For each instance, there are 1024 attributes (32x32 matrix), whose values are either 0 or 1. After grouping every 4x4 blocks, the dimension is reduced to 64 (8x8 matrix), and each attribute ranges from 0 to 16. Another is letter recognition dataset \cite{letterdataset}. The character images were based on 20 different fonts. It has 20000 instances. For each instance, there are 16 attributes, whose values range from 0 to 15. More details can be found by visiting the links.
+Our group wants to solve the problem of classifying hand-written digits and  black-and-white rectangular pixel-displayed letters. We have two datasets from UCI machine learning repository \cite{Lichman2013}. One is hand-written digits dataset \cite{digitdataset}. Another is letter recognition dataset \cite{letterdataset}. We will introduce them in more detail in Section \ref{exp}.
 
 \subsection{Classifying Algorithms}
 In this report, we test three machine learning  algorithms, i.e., Support Vector Machine (SVM), Neural Networks, and Naive Bayes. We will present the detail of algorithms in Section \ref{sec:metho}.
@@ -54,8 +55,34 @@ Neural networks have a long history, dating back to the 1940s \cite{mcculloch194
 \subsection{Naive Bayes}
 Naive Bayes classifier makes use of the Bayes Theorem. It is basically a conditional probability model. It is one of the simplest machine learning algorithms. Compared to Bayesian Networks, Naive Bayes is technically a special case by assuming that all features are conditionally independent from each other given the class label. One of the earliest papers that described this algorithm was from 1970s \cite{duda1973pattern}. 
 
-\section{Evaluation}
+\section{Experiment}\label{exp}
 In this project, we mainly used \texttt{Weka} \cite{hall2009weka} to test different machine learning algorithms. For each algorithm, we use different parameter settings, which will be covered in this section.
+
+\subsection{Datasets}
+We have two datasets, the hand-written digits dataset \cite{digitdataset} and the letter recognition dataset \cite{letterdataset}. The hand-written digits dataset has 5620 instances. For each instance, there are 1024 attributes (32x32 matrix), whose values are either 0 or 1. An example is shown in Figure \ref{fig:ex:digit}, which is clearly a `2'. After grouping every 4x4 blocks, the dimension is reduced to 64 (8x8 matrix), and each attribute ranges from 0 to 16. Another is letter recognition dataset \cite{letterdataset}. The character images were based on 20 different fonts. It has 20000 instances. For each instance, there are 16 attributes, whose values range from 0 to 15. The attributes are sophisticated, as shown in Figure \ref{fig:feature:letter}. Some examples of the fonts are shown in Figure \ref{fig:ex:letter}. More details of the datasets and features can be found by visiting the links.
+
+\begin{figure}[htbp]
+\centering
+
+\begin{subfigure}[htbp]{0.32\columnwidth}
+\includegraphics*[width=\textwidth]{fig/ex_digit}
+\caption{A Digit Example: 2}
+\label{fig:ex:digit}
+\end{subfigure}
+\hfill
+\begin{subfigure}[htbp]{0.32\columnwidth}
+\includegraphics*[width=\textwidth]{fig/ex_letter}
+\caption{Letter Examples}
+\label{fig:ex:letter}
+\end{subfigure}
+\hfill
+\begin{subfigure}[htbp]{0.32\columnwidth}
+\includegraphics*[width=\textwidth]{fig/feature_letter}
+\caption{Features of Letters}
+\label{fig:feature:letter}
+\end{subfigure}
+\caption{Examples and Features}
+\end{figure}
 
 \subsection{Hand-written Digits Classification}
 \subsubsection{Support Vector Machine}
@@ -88,7 +115,7 @@ It can be easily noticed that changing learning rate to 0.6 affects the performa
 \caption{Letter Recognition}
 \label{fig:letter-ann}
 \end{subfigure}
-\caption{Performance of Artificial Neural Networks}
+\caption{Performance of Multilayer Perceptron}
 \label{fig:ann}
 \end{figure}
 
@@ -104,10 +131,12 @@ The overall performance of multilayer perceptron is quite stable. The accuracy i
 
 Neural networks do a better job than the other two algorithms in recognizing `O' and `Q' and it can correctly tell `X' apart from `S'. Changing learning rate higher helps the performance with `H'.
 
+
 \begin{table}[!htb]
 %\begin{subtable}
 
 \centering
+\begin{minipage}{0.46\columnwidth}
 \begin{tabular}{c  c  c} \hline
 % centering table
 % creating 10 columns
@@ -126,21 +155,9 @@ Parameters & Class (Letters) & Accuracy \\\hline
 \end{tabular}
 \caption{Worst Cases: Multilayer Perceptron} % title name of the table
 \label{tbl:ann}
-%\end{subtable} 
-\end{table}
-
-
-\subsubsection{Naive Bayes}
-Naive Bayes does not work well on the Letter Recognition dataset. From Figure \ref{fig:letter-bayes}, we can see that the highest accuracy is lower than 75\%. Generally speaking, Naive Bayes is not suitable for classifying letters.
-
-In this dataset, we are also interested in which letters Naive Bayes performs worst. Table \ref{tbl:bayes} shows the top 3 worst cases when using Naive Bayes with different parameters. In all three parameter settings, `H' is always one of the top 3, which means that `H' is quite hard to classify for Naive Bayes. Also, the same applies to `S' and `X', as they appear in two of the three cases.
-
-
-
-\begin{table}[!htb]
-%\begin{subtable}
-
-\centering
+\end{minipage}
+\hfill
+\begin{minipage}{0.46\columnwidth}
 \begin{tabular}{c  c  c} \hline
 % centering table
 % creating 10 columns
@@ -159,8 +176,18 @@ Parameters & Class (Letters) & Accuracy \\\hline
 \end{tabular}
 \caption{Worst Cases: Naive Bayes} % title name of the table
 \label{tbl:bayes}
+\end{minipage}
 %\end{subtable} 
 \end{table}
+
+\subsubsection{Naive Bayes}
+Naive Bayes does not work well on the Letter Recognition dataset. From Figure \ref{fig:letter-bayes}, we can see that the highest accuracy is lower than 75\%. Generally speaking, Naive Bayes is not suitable for classifying letters.
+
+In this dataset, we are also interested in which letters Naive Bayes performs worst. Table \ref{tbl:bayes} shows the top 3 worst cases when using Naive Bayes with different parameters. In all three parameter settings, `H' is always one of the top 3, which means that `H' is quite hard to classify for Naive Bayes. Also, the same applies to `S' and `X', as they appear in two of the three cases.
+
+
+
+
 
 
 \begin{figure}[htbp]
