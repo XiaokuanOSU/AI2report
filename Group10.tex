@@ -283,8 +283,11 @@ Learning rate (-L) stands for the amount the weights are updated. Training time 
 In our tests, the validation threshold does not affect the performance.
  
 \section{Conclusion}
+In general, the correctness of handwritten letter/digit recognition depends greatly on the preprocess of data. Our experiments show that using the original pixels as the characters has a better performance than extracting the features from the data. Also, all the algorithms we test meet with difficulties of telling similar letters/digits apart.
 
-
+In particular, Naïve Bayes performs badly in letter recognition when K=f, D=f. With other parameter settings, the correctness is around 75\% with small deviation among different letters. In general, it has a better performance in doing digit classification than in letter recognition.
+SVM is generally suitable for both letter recognition and digit classification. However, due to the preprocess difference, the letter recognition performance is a little worse than digit classification. The classes that cannot be correctly classified are: H, S, Q, G and O.
+Artificial Neural Network is heavily influenced by the parameters that control the stochastics. But generally speaking, it has a relatively stable performance. And it has the highest accuracy for most of the cases in our experiments compared to the other two algorithms. It is also weak in classifying less letters, which are G, H and S.
 
 \newpage
 \bibliographystyle{plain}
