@@ -66,9 +66,9 @@ The hand-written digit dataset was first used in \cite{kaynak1995methods}. In th
 \section{Methodology}\label{sec:metho}
 
 \subsection{Support Vector Machine}
-Support vector machines (SVMs) \cite{cortes1995support} are supervised learning models that analyze data for classicifation or regression. Provided with a set of training examples, which are marked with their belonging categories, a SVM algorithm performs to build a model so as to recognize and assign testing examples to the predicted categories. 
+Support vector machines (SVMs) \cite{cortes1995support} are supervised learning models that analyze data for classification or regression. Provided with a set of training examples, which are marked with their belonging categories, a SVM algorithm performs to build a model so as to recognize and assign testing examples to the predicted categories. 
 
-Besides linear classification, SVMs are also able to efficiently perform non-linear classification when kernel trick is involved, whcih will map original input into high-dimensional attriubte space.
+Besides linear classification, SVMs are also able to efficiently perform non-linear classification when kernel tricks are applied\cite{boser1992training} , which will map original input into high-dimensional attribute space.
 
 \subsection{Neural Networks}
 Neural networks, or artificial neural networks \cite{hagan1996neural}, simulate the functions of nerve cells of human brain and serve as an important computational approach in machine learning. They typically form a structure of multiple layers of basic perceptrons and support both supervised and unsupervised learning.
@@ -101,7 +101,7 @@ We have two datasets, the hand-written digits dataset \cite{digitdataset} and th
 \hfill
 \begin{subfigure}[htbp]{0.46\columnwidth}
 \includegraphics*[width=\textwidth]{fig/smo_libsvm}
-\caption{Letter Recognition: SMO vs LibSVM}
+\caption{Comparison between SMO and LibSVM}
 \label{fig:smo-libsvm}
 \end{subfigure}
 \caption{Performance of Support Vector Machine}
@@ -111,7 +111,7 @@ We have two datasets, the hand-written digits dataset \cite{digitdataset} and th
 \subsection{Hand-written Digits Classification}
 \subsubsection{Support Vector Machine}
 
-As shwon in Figure \ref{fig:digit-svm}, the SVM classifier has a good performance on the Digit dataset. When the polynomial kernel is applied, 98.968\% accuracy can be achieved , and 97.9181\% accuracy is achieved in cases of the linear kernel. In our experiment, two key parameters are tuned. One is the kernel type and the other is the complexity parameter. For kernels, the linear kernel and the polynomial kernel are tested. 
+As shown in Figure \ref{fig:digit-svm}, SVM classifiers provide a good performance on the Digit dataset. In the experiment, two key parameters are tuned. One is the kernel type and the other is the complexity parameter. For kernels, the linear kernel and the non-linear polynomial kernel are tested. When the polynomial kernel is applied, 98.97\% accuracy can be achieved, and 97.92\% accuracy is achieved in cases of the linear kernel. 
 
 From the figure, two results can be observed. Firstly, polynomial kernel has better performance than the linear one, regardless of values of the complexity parameter. Secondly, the complexity parameter has little effect on the SVM model in regard with the Digit dataset. 
 
@@ -161,17 +161,17 @@ The Naive Bayes works well on the Hand-written Digit dataset. In Figure \ref{fig
 
 Parameters & Class (Letter) & Accuracy \\\hline
 \multirow{3}{*}{K = linear, C = 1} & S & 68\% \\
-	& H & 64.4\% \\
-	& S & 65\% \\\hline
+	& H & 69.8\% \\
+	& R & 73.8\% \\\hline
 \multirow{3}{*}{K = poly, C = 1} & H & 91\% \\
-	& H & 69.1\% \\
+	& R & 91\% \\
 	& S & 64\% \\\hline
 \multirow{3}{*}{K = linear, C = 2} & S & 67.5\% \\
-	& H & 65.1\% \\
-	& S & 64.4\% \\\hline
-\multirow{3}{*}{K = poly, C = 2} & H & 91.1\% \\
-	& H & 65.1\% \\
-	& S & 64.4\% \\\hline
+	& H & 69.7\% \\
+	& B & 92.4\% \\\hline
+\multirow{3}{*}{K = poly, C = 2} & R & 90.8\% \\
+	& H & 91.1\% \\
+	& F & 92.5\% \\\hline
 \end{tabular}
 \caption{Worst Cases: Support Vector Machine} % title name of the table
 \label{tbl:svm}
@@ -184,11 +184,13 @@ Parameters & Class (Letter) & Accuracy \\\hline
 \subsection{Letter Recognition}
 \subsubsection{Support Vector Machine}
 
-Compared with the Digit dataset, the polynomial kernel still has a good performance on the Letter dataset as more than 95\% instances are correctly recogonized. However, the accurarys from the linear kernel are much lower no matter which values of the complexity parameter are configured. From Figure \ref{fig:letter-svm}, we can see that only 85\% accuracy and F-measure are achieved when the linear kernel is used. 
+Compared with the Digit dataset, the polynomial kernel still has a good performance on the Letter dataset as more than 95\% instances are correctly recognized. However, the accuracy from the linear kernel is much lower no matter which values of the complexity parameter are configured. From Figure \ref{fig:letter-svm}, we can see that only 85\% accuracy and F-measure are achieved when the linear kernel is used, whereas those are more than 97\% for the Digit dataset.
+
+To explore an insight of which letters have large contribution to inaccurate recognition, a detailed inaccuracy analysis by class is given. Although the accuracy from the polynomial kernel is much higher than the linear one, as shown in Table \ref{tbl:svm}, both of them have least accuracy on recognizing letters 'H', 'S', and 'R'.
 
 
 \subsubsection{Neural Networks}
-The overall performance of multilayer perceptron is quite stable. The accuracy is around 82\% and the root relative squared error is around 56\%. However, there are some classes with relatively low accuracy making the average performance not so good as digit recognition. Figure \ref{tbl:ann} shows the least correct classes: `G', `H' and `S'.
+The overall performance of multilayer perceptron is quite stable. The accuracy is around 82\% and the root relative squared error is around 56\%. However, there are some classes with relatively low accuracy making the average performance not so good as digit recognition. Table \ref{tbl:ann} shows the least correct classes: `G', `H' and `S'.
 
 Neural networks do a better job than the other two algorithms in recognizing `O' and `Q' and it can correctly tell `X' apart from `S'. Changing learning rate higher helps the performance with `H'.
 
@@ -270,10 +272,11 @@ In this dataset, we are also interested in which letters Naive Bayes performs wo
 \subsection{Evaluation Matrix}
 In our presentation, we used \texttt{root relative squared error} to evaluate the performance of our algorithms and falsely claimed that SVM was not suitable for our datasets. However, it makes little sense to evaluate this feature on  non-binary datasets. So in the report, we changed it to F-measure.
 
-\subsection{Different Kernels of SVM}
-In our presentation, we only talked about the polynomial kernel. In the report, we added xxx, xxx kernels to compare the performance. By comparison, we can see that ......
+\subsection{Different Libraries of SVM}
 
-Say something Say something Say something Say something Say something Say something Say something Say something Say something Say something Say something Say somet
+In our presentation, we only discussed the performance of the polynomial kernel in SMO. To have a comprehensive understanding on the performance of SVMs, in the later work, experiments based LibSVM are performed.
+
+Figure \ref{fig:smo-libsvm} compares the accuracy and F-measure between SMO and LibSVM when the polynomial kernel is applied. Surprisedly, although both the complexity and kernel parameters are configured as the same, the accuracy from LibSVM is higher than that from SVM by 12\%. This difference may come from distinct algorithms and implementations behind them.
 
 \subsection{Parameters of Multilayer Perceptron}
 Multilayer Perceptron has a number of parameters. In the project, we would like to look into the following specific parameters: learning rate, training time and validation threshold. Other parameters include momentum, seed, nominalToBinaryFilter, hiddenLayers etc.
@@ -286,8 +289,8 @@ In our tests, the validation threshold does not affect the performance.
 In general, the correctness of handwritten letter/digit recognition depends greatly on the preprocess of data. Our experiments show that using the original pixels as the characters has a better performance than extracting the features from the data. Also, all the algorithms we test meet with difficulties of telling similar letters/digits apart.
 
 In particular, Naïve Bayes performs badly in letter recognition when K=f, D=f. With other parameter settings, the correctness is around 75\% with small deviation among different letters. In general, it has a better performance in doing digit classification than in letter recognition.
-SVM is generally suitable for both letter recognition and digit classification. However, due to the preprocess difference, the letter recognition performance is a little worse than digit classification. The classes that cannot be correctly classified are: H, S, Q, G and O.
-Artificial Neural Network is heavily influenced by the parameters that control the stochastics. But generally speaking, it has a relatively stable performance. And it has the highest accuracy for most of the cases in our experiments compared to the other two algorithms. It is also weak in classifying less letters, which are G, H and S.
+SVM is generally suitable for both letter recognition and digit classification. However, due to the preprocess difference, the letter recognition performance is a little worse than digit classification. The classes that cannot be correctly classified are: H, S, Q, G and O.
+Artificial Neural Network is heavily influenced by the parameters that control the stochastics. But generally speaking, it has a relatively stable performance. And it has the highest accuracy for most of the cases in our experiments compared to the other two algorithms. It is also weak in classifying less letters, which are G, H and S.
 
 \newpage
 \bibliographystyle{plain}
