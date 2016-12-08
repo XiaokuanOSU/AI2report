@@ -12,6 +12,7 @@
 \usepackage{mathptmx}
 \usepackage{epsfig}
 \usepackage{multirow}
+\usepackage{wrapfig}
 %\usepackage{minipage}
 \def \hfillx {\hspace*{-\textwidth} \hfill}
 
@@ -25,7 +26,8 @@
 
 \maketitle
 \section*{Abstract}
-say something
+In this project, we used different classification algorithms to classify hand-written digits and pixel-displayed letters. The algorithms we used were Naive Bayes, Support Vector Machine and Artificial Neural Networks. For each algorithm, we tuned different parameters in order to achieve a better performance. We used accuracy and F-measure to evaluate the performance. Generally speaking, SVM performed best among the three, and Naive Bayes does not work well. 
+
 
 \section{Introduction}
 
@@ -35,7 +37,7 @@ Our group wants to solve the problem of classifying hand-written digits and  bla
 \subsection{Classifying Algorithms}
 In this report, we test three machine learning  algorithms, i.e., Support Vector Machine (SVM), Neural Networks, and Naive Bayes. We will present the detail of algorithms in Section \ref{sec:metho}.
 \subsection{Result Summary}
-For the first dataset, after tuning the parameters, the three classifiers can achieve , , , accuracy. 
+For the hand-written digit dataset, after tuning the parameters, the three classifiers can achieve 98.97\%, 93.27\%, 92.02\%  accuracy. For the letter dataset, they can reach 95.33\%, 82.77\%, 74.18\% accuracy.
 
 \section{Background}
 The hand-written digit dataset was first used in \cite{kaynak1995methods}. In the paper they combined different classifiers to obtain a better performance.  The letter recognition dataset was first used in \cite{frey1991letter}. They generated classification rules to distinguish different letters.
@@ -79,7 +81,7 @@ Neural networks have a long history, dating back to the 1940s \cite{mcculloch194
 Naive Bayes classifier makes use of the Bayes Theorem. It is basically a conditional probability model. It is one of the simplest machine learning algorithms. Compared to Bayesian Networks, Naive Bayes is technically a special case by assuming that all features are conditionally independent from each other given the class label. One of the earliest papers that described this algorithm was from 1970s \cite{duda1973pattern}. 
 
 \section{Experiment}\label{exp}
-In this project, we mainly used \texttt{Weka} \cite{hall2009weka} to test different machine learning algorithms. For each algorithm, we use different parameter settings, which will be covered in this section.
+In this project, we mainly used \texttt{Weka} \cite{hall2009weka} to test different machine learning algorithms. For SVM, we mainly use LibSVM. For Artificial Neural Network, we choose Multilayer Perceptron. For Naive Bayes, we use the default Naive Bayes in \texttt{Weka}. For each algorithm, we use different parameter settings, which will be covered in this section.
 
 \subsection{Datasets}
 We have two datasets, the hand-written digits dataset \cite{digitdataset} and the letter recognition dataset \cite{letterdataset}. The hand-written digits dataset has 5620 instances. For each instance, there are 1024 attributes (32x32 matrix), whose values are either 0 or 1. An example is shown in Figure \ref{fig:ex:digit}, which is clearly a `2'. After grouping every 4x4 blocks, the dimension is reduced to 64 (8x8 matrix), and each attribute ranges from 0 to 16. Another is letter recognition dataset \cite{letterdataset}. The character images were based on 20 different fonts. It has 20000 instances. For each instance, there are 16 attributes, whose values range from 0 to 15. The attributes are sophisticated, as shown in Figure \ref{fig:feature:letter}. Some examples of the fonts are shown in Figure \ref{fig:ex:letter}. More details of the datasets and features can be found by visiting the links.
@@ -149,11 +151,22 @@ It can be easily noticed that changing learning rate to 0.6 affects the performa
 \subsubsection{Naive Bayes}
 The Naive Bayes works well on the Hand-written Digit dataset. In Figure \ref{fig:bayes}, K means whether to use kernel estimator, and D means whether to use supervised discretization. In Figure \ref{fig:digit-bayes}, when K=F, D=F, which is the worst case scenario, the accuracy and F-measure are still higher than 90\%. In the best case (K=T, D=F), they both exceeds 92\%.
 
-\begin{table}[!htb]
-%\begin{subtable}
 
+\subsection{Letter Recognition}
+\subsubsection{Support Vector Machine}
+
+Compared with the Digit dataset, the polynomial kernel still has a good performance on the Letter dataset as more than 95\% instances are correctly recognized. However, the accuracy from the linear kernel is much lower no matter which values of the complexity parameter are configured. From Figure \ref{fig:letter-svm}, we can see that only 85\% accuracy and F-measure are achieved when the linear kernel is used, whereas those are more than 97\% for the Digit dataset.
+
+To explore an insight of which letters have large contribution to inaccurate recognition, a detailed inaccuracy analysis by class is given. Although the accuracy from the polynomial kernel is much higher than the linear one, as shown in Table \ref{tbl:svm}, both of them have least accuracy on recognizing letters 'H', 'S', and 'R'.
+
+
+\subsubsection{Neural Networks}
+The overall performance of multilayer perceptron is quite stable. The accuracy is around 82\% and the root relative squared error is around 56\%. However, there are some classes with relatively low accuracy making the average performance not so good as digit recognition. Table \ref{tbl:ann} shows the least correct classes: `G', `H' and `S'.
+
+Neural networks do a better job than the other two algorithms in recognizing `O' and `Q' and it can correctly tell `X' apart from `S'. Changing learning rate higher helps the performance with `H'.
+
+\begin{wraptable}[13]{r}{0.5\textwidth}
 \centering
-\begin{minipage}{0.46\columnwidth}
 \begin{tabular}{c  c  c} \hline
 % centering table
 % creating 10 columns
@@ -175,27 +188,55 @@ Parameters & Class (Letter) & Accuracy \\\hline
 \end{tabular}
 \caption{Worst Cases: Support Vector Machine} % title name of the table
 \label{tbl:svm}
-\end{minipage}
+\end{wraptable}
+%\vspace{10cm}
+
+\newpage
+
+\subsubsection{Naive Bayes}
+Naive Bayes does not work well on the Letter Recognition dataset. From Figure \ref{fig:letter-bayes}, we can see that the highest accuracy is lower than 75\%. Generally speaking, Naive Bayes is not suitable for classifying letters.
+
+In this dataset, we are also interested in which letters Naive Bayes performs worst. Table \ref{tbl:bayes} shows the top 3 worst cases when using Naive Bayes with different parameters. In all three parameter settings, `H' is always one of the top 3, which means that `H' is quite hard to classify for Naive Bayes. Also, the same applies to `S' and `X', as they appear in two of the three cases.
+
+
+
+\section{Discussion}
+
+\subsection{Evaluation Matrix}
+In our presentation, we used \texttt{root relative squared error} to evaluate the performance of our algorithms and falsely claimed that SVM was not suitable for our datasets. However, it makes little sense to evaluate this feature on  non-binary datasets. So in the report, we changed it to F-measure.
+
+\subsection{Different Libraries of SVM}
+
+In our presentation, we only discussed the performance of the polynomial kernel in SMO. To have a comprehensive understanding on the performance of SVMs, in the later work, experiments based LibSVM are performed.
+
+Figure \ref{fig:smo-libsvm} compares the accuracy and F-measure between SMO and LibSVM when the polynomial kernel is applied. Surprisedly, although both the complexity and kernel parameters are configured as the same, the accuracy from LibSVM is higher than that from SMO by 12\%. This difference may come from distinct algorithms and implementations behind them.
+
+\begin{figure}[htbp]
+\centering
+
+\begin{subfigure}[htbp]{0.46\columnwidth}
+\includegraphics*[width=\textwidth]{fig/digit_bayes}
+\caption{Digit Classification}
+\label{fig:digit-bayes}
+\end{subfigure}
 \hfill
+\begin{subfigure}[htbp]{0.46\columnwidth}
+\includegraphics*[width=\textwidth]{fig/letter_bayes}
+\caption{Letter Recognition}
+\label{fig:letter-bayes}
+\end{subfigure}
+\caption{Performance of Naive Bayes}
+\label{fig:bayes}
+\end{figure}
 
-\end{table}
+\subsection{Parameters of Multilayer Perceptron}
+Multilayer Perceptron has a number of parameters. In the project, we would like to look into the following specific parameters: learning rate, training time and validation threshold. Other parameters include momentum, seed, nominalToBinaryFilter, hiddenLayers etc.
 
+Learning rate (-L) stands for the amount the weights are updated. Training time (-N) is the number of epochs to train through. If the validation set is non-zero then it can terminate the network early. Validation threshold (-E) is used to terminate validation testing. The value here dictates how many times in a row the validation set error can get worse before training is terminated.
 
-\subsection{Letter Recognition}
-\subsubsection{Support Vector Machine}
-
-Compared with the Digit dataset, the polynomial kernel still has a good performance on the Letter dataset as more than 95\% instances are correctly recognized. However, the accuracy from the linear kernel is much lower no matter which values of the complexity parameter are configured. From Figure \ref{fig:letter-svm}, we can see that only 85\% accuracy and F-measure are achieved when the linear kernel is used, whereas those are more than 97\% for the Digit dataset.
-
-To explore an insight of which letters have large contribution to inaccurate recognition, a detailed inaccuracy analysis by class is given. Although the accuracy from the polynomial kernel is much higher than the linear one, as shown in Table \ref{tbl:svm}, both of them have least accuracy on recognizing letters 'H', 'S', and 'R'.
-
-
-\subsubsection{Neural Networks}
-The overall performance of multilayer perceptron is quite stable. The accuracy is around 82\% and the root relative squared error is around 56\%. However, there are some classes with relatively low accuracy making the average performance not so good as digit recognition. Table \ref{tbl:ann} shows the least correct classes: `G', `H' and `S'.
-
-Neural networks do a better job than the other two algorithms in recognizing `O' and `Q' and it can correctly tell `X' apart from `S'. Changing learning rate higher helps the performance with `H'.
-
-
-\begin{table}[!htb]
+In our tests, the validation threshold does not affect the performance.
+ 
+ \begin{table}[!htb]
 %\begin{subtable}
 
 \centering
@@ -242,55 +283,14 @@ Parameters & Class (Letters) & Accuracy \\\hline
 \end{minipage}
 %\end{subtable} 
 \end{table}
-
-
-\subsubsection{Naive Bayes}
-Naive Bayes does not work well on the Letter Recognition dataset. From Figure \ref{fig:letter-bayes}, we can see that the highest accuracy is lower than 75\%. Generally speaking, Naive Bayes is not suitable for classifying letters.
-
-In this dataset, we are also interested in which letters Naive Bayes performs worst. Table \ref{tbl:bayes} shows the top 3 worst cases when using Naive Bayes with different parameters. In all three parameter settings, `H' is always one of the top 3, which means that `H' is quite hard to classify for Naive Bayes. Also, the same applies to `S' and `X', as they appear in two of the three cases.
-
-
-\begin{figure}[htbp]
-\centering
-
-\begin{subfigure}[htbp]{0.46\columnwidth}
-\includegraphics*[width=\textwidth]{fig/digit_bayes}
-\caption{Digit Classification}
-\label{fig:digit-bayes}
-\end{subfigure}
-\hfill
-\begin{subfigure}[htbp]{0.46\columnwidth}
-\includegraphics*[width=\textwidth]{fig/letter_bayes}
-\caption{Letter Recognition}
-\label{fig:letter-bayes}
-\end{subfigure}
-\caption{Performance of Naive Bayes}
-\label{fig:bayes}
-\end{figure}
-\section{Discussion}
-
-\subsection{Evaluation Matrix}
-In our presentation, we used \texttt{root relative squared error} to evaluate the performance of our algorithms and falsely claimed that SVM was not suitable for our datasets. However, it makes little sense to evaluate this feature on  non-binary datasets. So in the report, we changed it to F-measure.
-
-\subsection{Different Libraries of SVM}
-
-In our presentation, we only discussed the performance of the polynomial kernel in SMO. To have a comprehensive understanding on the performance of SVMs, in the later work, experiments based LibSVM are performed.
-
-Figure \ref{fig:smo-libsvm} compares the accuracy and F-measure between SMO and LibSVM when the polynomial kernel is applied. Surprisedly, although both the complexity and kernel parameters are configured as the same, the accuracy from LibSVM is higher than that from SVM by 12\%. This difference may come from distinct algorithms and implementations behind them.
-
-\subsection{Parameters of Multilayer Perceptron}
-Multilayer Perceptron has a number of parameters. In the project, we would like to look into the following specific parameters: learning rate, training time and validation threshold. Other parameters include momentum, seed, nominalToBinaryFilter, hiddenLayers etc.
-
-Learning rate (-L) stands for the amount the weights are updated. Training time (-N) is the number of epochs to train through. If the validation set is non-zero then it can terminate the network early. Validation threshold (-E) is used to terminate validation testing. The value here dictates how many times in a row the validation set error can get worse before training is terminated.
-
-In our tests, the validation threshold does not affect the performance.
- 
 \section{Conclusion}
-In general, the correctness of handwritten letter/digit recognition depends greatly on the preprocess of data. Our experiments show that using the original pixels as the characters has a better performance than extracting the features from the data. Also, all the algorithms we test meet with difficulties of telling similar letters/digits apart.
+To summarize, our algorithms performs well on the hand-written digit dataset. However, all the algorithms we test have difficulties telling similar letters apart.
 
-In particular, Naïve Bayes performs badly in letter recognition when K=f, D=f. With other parameter settings, the correctness is around 75\% with small deviation among different letters. In general, it has a better performance in doing digit classification than in letter recognition.
-SVM is generally suitable for both letter recognition and digit classification. However, due to the preprocess difference, the letter recognition performance is a little worse than digit classification. The classes that cannot be correctly classified are: H, S and R.
-Artificial Neural Network is heavily influenced by the parameters that control the stochastics. But generally speaking, it has a relatively stable performance. And it has the highest accuracy for most of the cases in our experiments compared to the other two algorithms. It is also weak in classifying less letters, which are G, H and S.
+In particular, Naive Bayes performs badly in letter recognition when K=F, D=F. With other parameter settings, the correctness is around 75\% with small deviation among different letters. In general, it has a better performance in doing digit classification than in letter recognition.
+
+SVM is generally suitable for both letter recognition and digit classification. It performs best among all the three methods. Similar to another two algorithms, the letter recognition performance is a little worse than digit classification. The classes that cannot be correctly classified are: H, S and R.
+
+Multilayer Perceptron is heavily influenced by the parameters that control the stochastics. But generally speaking, it has a relatively stable performance. It is also weak in classifying some letters, which are G, H and S.
 
 \newpage
 \bibliographystyle{plain}
